@@ -92,11 +92,11 @@ WSGI_APPLICATION = 'BACKEND.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u704095602_vayoaura',         # The name you set in Hostinger
-        'USER': 'u704095602_ali',         # The username you set
-        'PASSWORD': 'Chellom1234@', # The password you set
-        'HOST': 'srv1674.hstgr.io',  # Database host provided by Hostinger
-        'PORT': '3306',  
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '3305'), 
     }
 }
 
