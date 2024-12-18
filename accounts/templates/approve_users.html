@@ -1,0 +1,29 @@
+<!-- approve_users.html -->
+{% include 'navbar.html' %}
+
+<h2>Approve Users</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for agent in pending_users %}
+            <tr>
+                <td>{{ agent.user.username }}</td>
+                <td>{{ agent.user.email }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ agent.user.id }}">
+                        <button type="submit">Approve</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

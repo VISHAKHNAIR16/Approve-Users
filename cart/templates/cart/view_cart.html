@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>View Cart</title>
+</head>
+<body>
+    {% load custom_filters %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Travel Transfers</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_cart' %}">Cart <span class="badge badge-pill badge-primary">{{ cart_items.count }}</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h2 class="text-center">Your Cart</h2>
+        {% if cart_items %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Vehicle Name</th>
+                        <th>Pickup Location</th>
+                        <th>Dropoff Location</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.listing_option.vehicle_name }}</td>
+                            <td>{{ item.listing_option.pickup_location }}</td>
+                            <td>{{ item.listing_option.dropoff_location }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.listing_option.price }} AED</td>
+                            <td>{{ item.quantity|multiply:item.listing_option.price }} AED</td>
+                            <td>
+                                <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-center mt-4">Your cart is empty.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

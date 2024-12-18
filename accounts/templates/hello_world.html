@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <h1>Hello, World!</h1>
+    <p>Welcome, {{ user.username }}!</p>
+    <p><a href="{% url 'login' %}">Log out</a></p>
+    <p><a href="{% url 'search_transfer' %}">Transfers</a></p>
+</body>
+</html>

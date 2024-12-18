@@ -1,0 +1,56 @@
+<!-- search_transfer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Search Transfer</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Vayoaura</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Hotels</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Transfers</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Book Your Transfer</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="pickup_location">Pickup Location</label>
+                <select class="form-control" id="pickup_location" name="pickup_location" required>
+                    <option value="" disabled selected>Select Pickup Location</option>
+                    {% for location in locations %}
+                        <option value="{{ location.name }}">{{ location.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dropoff_location">Dropoff Location</label>
+                <select class="form-control" id="dropoff_location" name="dropoff_location" required>
+                    <option value="" disabled selected>Select Dropoff Location</option>
+                    {% for location in locations %}
+                        <option value="{{ location.name }}">{{ location.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                {{ form.date }}
+            </div>
+            <div class="form-group">
+                <label for="num_people">Number of People</label>
+                <input type="number" class="form-control" id="num_people" name="num_people" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </form>
+    </div>
+</body>
+</html>

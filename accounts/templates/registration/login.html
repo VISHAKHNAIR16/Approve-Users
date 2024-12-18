@@ -1,0 +1,21 @@
+<!-- registration/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <h2>Login</h2>
+    {% if form.errors %}
+        <p style="color: red;">{{ form.errors }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p>If you are a new user, please <a href="{% url 'register' %}">register here</a>.</p>
+</body>
+</html>
